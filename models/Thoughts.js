@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const thoughtsSchema = require('./User');
+const { Schema } = require('mongoose');
+// const thoughtsSchema = require('./User');
 
 // Schema to create Thoughts model
 const thoughtsSchema = new Schema(
@@ -15,8 +15,8 @@ const thoughtsSchema = new Schema(
             type: String,
             required: true,
         },
-        reactions: {
-        }
         
-    }
-)
+    });
+
+
+module.exports = thoughtsSchema;
