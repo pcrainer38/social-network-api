@@ -5,9 +5,9 @@ const { Schema, model } = require('mongoose');
 const thoughtSchema = new Schema(
     {
         thought: {
-            type: String,
-            // type: Schema.Types.ObjectId,
-            // default: () => new  Types.ObjectId(),
+            // type: String,
+            type: Schema.Types.ObjectId,
+            default: () => new  Types.ObjectId(),
         },
         createdAt: {
             type: Date,
