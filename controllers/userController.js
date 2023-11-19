@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongoose').Types;
-const { User } = require('../models');
+const  ObjectId  = require('mongoose').Types;
+const  { User, Friend }  = require('../models');
 
 module.exports = {
     // get all users
@@ -32,7 +32,7 @@ module.exports = {
     // create new user
     async createUser(req, res) {
         try {
-            const student = await User.create(req.body);
+            const user = await User.create(req.body);
             res.json(user);
         } catch (err) {
             res.status(500).json(err);
@@ -55,13 +55,14 @@ module.exports = {
       
 
     // Add a thought to a user
-    async addThought(req, res) {
-        try {
-            console.log('You are adding a thought');
+    async addFriend(req, res) {
+        
+            console.log('You are adding a friend');
             console.log(req.body);
+        try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $addToSet: { thoughts: req.body }},
+                { $addToSet: { friend: req.body }},
                 { runValidators: true, new: true}
             );
             if(!user) {
@@ -76,11 +77,11 @@ module.exports = {
             }
     },
     // remove thought from a user
-    async removeThought(req, res) {
+    async removeFriend(req, res) {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $pull: { thought: { thoughtId: req.params.thoughtId }}},
+                { $pull: { friend: { friendId: req.params.friendId }}},
                 { runValidators: true, new: true }
             );
 

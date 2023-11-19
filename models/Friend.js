@@ -3,7 +3,7 @@ const userSchema = require('./User')
 
 const friendSchema = new Schema(
 {
-    friendName: {
+    friend: {
         type: Schema.Types.ObjectId,
         required: false,
         ref: 'User',
