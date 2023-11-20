@@ -1,14 +1,12 @@
 const  ObjectId  = require('mongoose').Types;
-const  { User, Friend }  = require('../models');
+const  { User }  = require('../models');
 
 module.exports = {
     // get all users
     async getUsers(req, res) {
         try {
-            const users = await User.find();
-            const userObj = {
-                users
-            };
+            const users = await User.find().populate('thoughts').populate('friends');
+            const userObj = { users };
             return res.json(userObj);
         } catch(err) {
             console.log(err);
@@ -29,6 +27,7 @@ module.exports = {
             return res.status(500).json(err);
         }
     },
+
     // create new user
     async createUser(req, res) {
         try {
@@ -46,6 +45,7 @@ module.exports = {
                 return res.status(404).json({ message: 'No such user exists'})
             } else {
                 console.log('User deleted.')
+                res.json(user);
             }
         } catch (err) {
             console.log(err);
@@ -62,7 +62,7 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $addToSet: { friend: { friendId: req.params.friendId }}},
+                { $addToSet: { friends: req.params.friendId }},
                 { runValidators: true, new: true}
             );
             if(!user) {
@@ -81,7 +81,7 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $pull: { friend: { friendId: req.params.friendId }}},
+                { $pull: { friends: req.params.friendId }},
                 { runValidators: true, new: true }
             );
 
