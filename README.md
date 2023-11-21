@@ -8,6 +8,10 @@
   
   This is an API in which you can add users, friends, thoughts and reactions.  The information is stored in MongoDB and is interacted with using mongoose via an API development platform like Insomnia.
 
+  ## Link to Walkthrough
+  
+  https://drive.google.com/file/d/1F2Eh-_Y94tdnxTbYeMwVLJDogoKmSAg_/view
+
   ## Table of Contents 
   - [Installation](#installation) 
   - [Usage](#usage) 
